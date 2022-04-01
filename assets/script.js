@@ -22,12 +22,14 @@ function handleTimer() {
 }
 
 function highScore() {
-  
+
 }
 
 function buildQuiz() {
   // variable to store the HTML output
   const output = [];
+
+  submitButton.setAttribute('class', `btn btn-block btn-warning`)
 
   // for each question...
   myQuestions.forEach(
@@ -41,18 +43,20 @@ function buildQuiz() {
 
         // ...add an HTML radio button
         answers.push(
-          `<label>
-                <input type="radio" name="question${questionNumber}" value="${letter}">
-                ${letter} :
-                ${currentQuestion.answers[letter]}
-              </label>`
+        `<input class="btn-check" type="radio" id="btn-check-outline" name="question${questionNumber}" value="${letter}">
+          <label class="btn btn-outline-primary d-block" for="btn-check-outlined">
+            ${currentQuestion.answers[letter]}
+          </label>`
         );
       }
 
       // add this question and its answers to the output
       output.push(
-        `<div class="question"> ${currentQuestion.question} </div>
-            <div class="answers"> ${answers.join('')} </div>`
+        //adding bootstrap style to make questions sit on top of one another
+        `<div class="slide">
+          <div class="font-weight-bold"> ${currentQuestion.question} </div>
+          <div class="mb-20"> ${answers.join("")} </div>
+        </div>`
       );
     }
   );
@@ -100,7 +104,7 @@ function showResults() {
   Save your score?`) === true) {
     //prompt initials and add to high score ul and reload, else just reload
     if (prompt(`Type initials below:`) === true) {
-      highScore();
+      //highScore();
       location.reload()
     }else {
       location.reload()
@@ -111,7 +115,7 @@ function showResults() {
 }
 
 const quizContainer = document.getElementById('quiz');
-const resultsContainer = document.getElementById('results');
+// const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
 const startBtn = document.getElementById('startBtn');
 const start = document.getElementById('start');
