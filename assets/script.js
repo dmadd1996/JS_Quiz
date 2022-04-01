@@ -8,10 +8,21 @@ function startQuiz() {
 }
 
 function handleTimer() {
+  //timer counts down
   time--;
   timerEl.textContent = time;
 
-  //check to make sure time doesn't go negative
+  //but not negatively
+  if (time === -1) {
+    //just in case, but not necessary because...
+    clearInterval(timer);
+    //the alert stops the timer anyways
+    showResults()
+  }
+}
+
+function highScore() {
+  
 }
 
 function buildQuiz() {
@@ -84,13 +95,21 @@ function showResults() {
     }
   });
 
-  // show number of correct answers out of total
-  resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+  // show number of correct answers out of total and confirm save score, else reload
+  if (confirm(`Quiz Over: You got ${numCorrect} out of ${myQuestions.length} correct. 
+  Save your score?`) === true) {
+    //prompt initials and add to high score ul and reload, else just reload
+    if (prompt(`Type initials below:`) === true) {
+      highScore();
+      location.reload()
+    }else {
+      location.reload()
+    }
+  }else {
+    location.reload()
+  };
 }
 
-let time = myQuestions.length * 30;
-let timer;
-const timerEl = document.getElementById('timerEl')
 const quizContainer = document.getElementById('quiz');
 const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
@@ -126,10 +145,14 @@ const myQuestions = [
     correctAnswer: "d"
   }
 ];
+let time = myQuestions.length * 1;
+let timer;
+const timerEl = document.getElementById('timerEl')
 
 // Kick things off
 //buildQuiz();
 
 // Event listeners
 startBtn.addEventListener('click', startQuiz)
+console.log(startQuiz)
 submitButton.addEventListener('click', showResults);
