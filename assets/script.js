@@ -2,8 +2,8 @@ const btn = document.getElementById("btn");
 
 btn.addEventListener("click", ()=>{
 
-    if(btn.innerText === "Start"){
-        btn.innerText = "Next";
+    if("btn.innerText === 'START'"){
+        btn.innerText = "NEXT";
     }
 });
 
