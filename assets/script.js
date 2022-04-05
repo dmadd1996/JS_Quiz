@@ -43,8 +43,9 @@ function buildQuiz() {
 
         // ...add an HTML radio button
         answers.push(
-        `<input class="btn-check" type="radio" id="btn-check-outline" name="question${questionNumber}" value="${letter}">
-          <label class="btn btn-outline-primary d-block" for="btn-check-outlined">
+          `<label>
+            <input type="radio" name="question${questionNumber}" value="${letter}">
+            ${letter} :
             ${currentQuestion.answers[letter]}
           </label>`
         );
@@ -52,7 +53,6 @@ function buildQuiz() {
 
       // add this question and its answers to the output
       output.push(
-        //adding bootstrap style to make questions sit on top of one another
         `<div class="slide">
           <div class="font-weight-bold"> ${currentQuestion.question} </div>
           <div class="mb-20"> ${answers.join("")} </div>
