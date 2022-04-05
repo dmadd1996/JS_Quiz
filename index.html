@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="Description" content="Enter your description here" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/style.css">
 
   <title>Bootstrap Utilities</title>
 </head>
@@ -25,13 +26,12 @@
 
         <div class="bg-white my-4 p-4 rounded">
             <!-- What the user sees on page load -->
-            <div id="strtScrn">
+            <div id="startScreen">
                 <h2 class="font-weight-bold text-center mb-3">THIS IS A TIMED QUIZ</h2>
                 <h3 class="text-center mb-5">When you are prepared, Press Start</h3>
-                <button class="btn btn-block btn-secondary" id="btn">START</button>
             </div>
 
-            <div class="d-none" id="1"> 
+            <div class="hidden" id="1"> 
                 <!-- When user presses start -->
                 <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
                     get fucked
@@ -46,8 +46,8 @@
                 </button>
             </div>
 
-            <div class="d-none" id="2"> 
-                <!-- When user presses start -->
+            <div class="hidden" id="2"> 
+                <!-- When user presses next -->
                 <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
                     get fucked
                 </button>
@@ -61,8 +61,8 @@
                 </button>
             </div>
 
-            <div class="d-none" id="3"> 
-                <!-- When user presses start -->
+            <div class="hidden" id="3"> 
+                <!-- When user presses next -->
                 <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
                     get fucked
                 </button>
@@ -76,8 +76,8 @@
                 </button>
             </div>
 
-            <div class="d-none" id="4"> 
-                <!-- When user presses start -->
+            <div class="hidden" id="4"> 
+                <!-- When user presses next -->
                 <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
                     get fucked
                 </button>
@@ -91,8 +91,8 @@
                 </button>
             </div>
 
-            <div class="d-none" id="5"> 
-                <!-- When user presses start -->
+            <div class="hidden" id="5"> 
+                <!-- When user presses next -->
                 <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
                     get fucked
                 </button>
@@ -106,8 +106,8 @@
                 </button>
             </div>
 
-            <div class="d-none" id="6"> 
-                <!-- When user presses start -->
+            <div class="hidden" id="6"> 
+                <!-- When user presses next -->
                 <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
                     get fucked
                 </button>
@@ -120,6 +120,7 @@
                     how about go get fucked
                 </button>
             </div>
+            <button class="btn btn-block btn-secondary" id="btn">START</button>
         </div>
 
       </div>
