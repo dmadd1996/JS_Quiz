@@ -36,12 +36,10 @@ function buildQuiz(){}
 
 btn.onclick = function btnSwitch () {
 
-    console.log("poopoo")
+    console.log("start>next")
 
     if("btn.innerText === 'START'"){
         btn.innerText = "NEXT";
         hideStart()
-    }
-
-    
+    }    
 }
