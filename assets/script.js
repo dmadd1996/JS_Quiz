@@ -12,6 +12,7 @@ function handleTimer() {
   time--;
   timerEl.textContent = time;
 
+  //check to make sure time doesn't go negative
   //but not negatively
   if (time === -1) {
     //just in case, but not necessary because...
@@ -28,19 +29,13 @@ function highScore() {
 function buildQuiz() {
   // variable to store the HTML output
   const output = [];
-
-  submitButton.setAttribute('class', `btn btn-block btn-warning`)
-
   // for each question...
   myQuestions.forEach(
     (currentQuestion, questionNumber) => {
-
       // variable to store the list of possible answers
       const answers = [];
-
       // and for each available answer...
       for (letter in currentQuestion.answers) {
-
         // ...add an HTML radio button
         answers.push(
           `<label>
@@ -50,45 +45,31 @@ function buildQuiz() {
           </label>`
         );
       }
-
       // add this question and its answers to the output
       output.push(
-        `<div class="slide">
-          <div class="font-weight-bold"> ${currentQuestion.question} </div>
-          <div class="mb-20"> ${answers.join("")} </div>
-        </div>`
+        `<div class="question"> ${currentQuestion.question} </div>
+        <div class="answers"> ${answers.join('')} </div>`
       );
     }
   );
-
-
-
   // finally combine our output list into one string of HTML and put it on the page
   quizContainer.innerHTML = output.join('');
-
 }
-
 function showResults() {
-
   // gather answer containers from our quiz
   const answerContainers = quizContainer.querySelectorAll('.answers');
-
   // keep track of user's answers
   let numCorrect = 0;
-
   // for each question...
   myQuestions.forEach((currentQuestion, questionNumber) => {
-
     // find selected answer
     const answerContainer = answerContainers[questionNumber];
     const selector = `input[name=question${questionNumber}]:checked`;
     const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
     // if answer is correct
     if (userAnswer === currentQuestion.correctAnswer) {
       // add to the number of correct answers
       numCorrect++;
-
       // color the answers green
       answerContainers[questionNumber].style.color = 'lightgreen';
     }
@@ -99,23 +80,26 @@ function showResults() {
     }
   });
 
+  // show number of correct answers out of total
+  resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
   // show number of correct answers out of total and confirm save score, else reload
   if (confirm(`Quiz Over: You got ${numCorrect} out of ${myQuestions.length} correct. 
   Save your score?`) === true) {
     //prompt initials and add to high score ul and reload, else just reload
     if (prompt(`Type initials below:`) === true) {
-      //highScore();
+      // highScore();
       location.reload()
-    }else {
+    } else {
       location.reload()
     }
-  }else {
+  } else {
     location.reload()
   };
 }
 
+
 const quizContainer = document.getElementById('quiz');
-// const resultsContainer = document.getElementById('results');
+const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
 const startBtn = document.getElementById('startBtn');
 const start = document.getElementById('start');
@@ -149,7 +133,8 @@ const myQuestions = [
     correctAnswer: "d"
   }
 ];
-let time = myQuestions.length * 1;
+
+let time = myQuestions.length * 30;
 let timer;
 const timerEl = document.getElementById('timerEl')
 
