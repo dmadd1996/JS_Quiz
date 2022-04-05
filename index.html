@@ -2,134 +2,48 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="Description" content="Enter your description here" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./assets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
 
-  <title>Bootstrap Utilities</title>
+    <title>JS Quiz</title>
 </head>
 
 <body>
 
-  <div class="min-vh-100 d-flex align-items-center bg-dark">
+    <div class="min-vh-100 d-flex align-items-center bg-dark">
 
-    <section class="w-100 row justify-content-center">
+        <section class="w-100 row justify-content-center">
 
-      <div class="col-10 col-md-6 col-lg-5">
+            <div class="col-10 col-md-6 col-lg-5">
 
-        <h1 class="display-3 text-center text-white">JavaScript,</h1>
+                <h1 class="display-3 text-center text-white">JavaScript,</h1>
 
-        <p class="text-center text-white"> Test Your Might </p>
+                <p id="subLine" class="text-center text-white"> Test Your Might </p>
 
-        <div class="bg-white my-4 p-4 rounded">
-            <!-- What the user sees on page load -->
-            <div id="startScreen">
-                <h2 class="font-weight-bold text-center mb-3">THIS IS A TIMED QUIZ</h2>
-                <h3 class="text-center mb-5">When you are prepared, Press Start</h3>
-            </div>
+                <div class="bg-white my-4 p-4 rounded">
+                    <!-- What the user sees on page load -->
+                    <div id="startScreen">
+                        <h2 class="font-weight-bold text-center mb-3">THIS IS A TIMED QUIZ</h2>
+                        <h3 class="text-center mb-5">When you are prepared, Press Start</h3>
+                    </div>
 
-            <div class="hidden" id="1"> 
-                <!-- When user presses start -->
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
-                    get fucked
-                </button>
-                
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="b">
-                    how about get fucked
-                </button>
+                    <div id="quizContainer">
+                        
+                    </div>
 
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="c">
-                    how about go get fucked
-                </button>
-            </div>
 
-            <div class="hidden" id="2"> 
-                <!-- When user presses next -->
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
-                    get fucked
-                </button>
-                
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="b">
-                    how about get fucked
-                </button>
 
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="c">
-                    how about go get fucked
-                </button>
-            </div>
+                </div>
 
-            <div class="hidden" id="3"> 
-                <!-- When user presses next -->
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
-                    get fucked
-                </button>
-                
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="b">
-                    how about get fucked
-                </button>
+        </section>
 
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="c">
-                    how about go get fucked
-                </button>
-            </div>
+    </div>
 
-            <div class="hidden" id="4"> 
-                <!-- When user presses next -->
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
-                    get fucked
-                </button>
-                
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="b">
-                    how about get fucked
-                </button>
-
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="c">
-                    how about go get fucked
-                </button>
-            </div>
-
-            <div class="hidden" id="5"> 
-                <!-- When user presses next -->
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
-                    get fucked
-                </button>
-                
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="b">
-                    how about get fucked
-                </button>
-
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="c">
-                    how about go get fucked
-                </button>
-            </div>
-
-            <div class="hidden" id="6"> 
-                <!-- When user presses next -->
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="a">
-                    get fucked
-                </button>
-                
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="b">
-                    how about get fucked
-                </button>
-
-                <button type="radio" class="d-block w-50 rounded bg-primary m-3" id="c">
-                    how about go get fucked
-                </button>
-            </div>
-            <button class="btn btn-block btn-secondary" id="btn">START</button>
-        </div>
-
-      </div>
-
-    </section>
-
-  </div>
-
-  <script src="./assets/script.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 
 </html>

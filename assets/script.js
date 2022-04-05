@@ -1,5 +1,6 @@
-const startScrn = document.getElementById("startScrn")
+const startScreen = document.getElementById("startScreen")
 const btn = document.getElementById("btn");
+const subLine = document.getElementById("subLine")
 
 var myQuestions = [
     {
@@ -26,6 +27,7 @@ var myQuestions = [
 
 function hideStart() {
     startScreen.setAttribute("class", "hidden")
+    subLine.setAttribute("class","hidden")
 }
 
 function buildQuiz(){}
