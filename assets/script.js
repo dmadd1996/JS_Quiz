@@ -134,6 +134,10 @@ function displayScores() {
   savedScores.textContent = displayedScoreArray
 }
 
+function setScore(){
+  localStorage.setItem('highScores', JSON.stringify(scoreArray))
+}
+
 var initials = document.getElementById('initials')
 var scoreArray = [];
 
@@ -146,7 +150,7 @@ initialsBtn.onclick = function ScoreSave() {
   scoreArray.push(newScore)
   console.log(scoreArray)
 
-  localStorage.setItem('highScores', JSON.stringify(scoreArray))
+  scoreLocalSet()
 }
 
 savedScores.textContent = JSON.parse(localStorage.getItem('highScores'))
