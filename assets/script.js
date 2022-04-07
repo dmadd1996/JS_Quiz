@@ -2,6 +2,8 @@ const startScreen = document.getElementById("startScreen")
 const btn = document.getElementById("btn");
 const subLine = document.getElementById("subLine")
 const quizContainer = document.getElementById('quizContainer')
+//variable to track question index
+var i = 0
 
 var myQuestions = [
     {
@@ -24,18 +26,22 @@ var myQuestions = [
         },
         correctAnswer: "a"
     },
+    {
+        question: "What color is the sky?",
+
+        answers: {
+            a: "red",
+            b: "green",
+            c: "blue"
+        },
+        correctAnswer: "c"
+    },
 ]
-function buildQuiz(){
-    for (var i = 0; i < myQuestions.length; i++){
-        // console.log(myQuestions[i].answers)
-        // let quizQuestion = document.createElement('h3')
-        // let optionContainer = document.createElement('button class="btn-outline-primary"')
-        // let quizOption = document.createElement('button class="btn-outline-primary"')
 
-        // quizQuestion.textContent = myQuestions[i].question
-
-        quizContainer.innerHTML = `<h3>${myQuestions[i].question}</h3>
-        <form action="/action_page.php">
+//Display quiz from array when user presses start
+function buildQuiz() {
+    quizContainer.innerHTML = `<h3>${myQuestions[i].question}</h3>
+        <form id="quizForm">
             <input type="radio" id="a" name="${myQuestions[i].answers} value="a">
             <label for="a">${myQuestions[i].answers.a}</label><br>
             <input type="radio" id="b" name="${myQuestions[i].answers} value="b">
@@ -43,14 +49,16 @@ function buildQuiz(){
             <input type="radio" id="c" name="${myQuestions[i].answers} value="c">
             <label for="c">${myQuestions[i].answers.c}</label><br>
         </form>`
-    }
+}
+
+function answerCheck () {
+    var userAnswer = document.querySelector()
 
 }
 
-buildQuiz()
-
 btn.onclick = function hideStart() {
     startScreen.setAttribute("class", "hidden")
-    subLine.setAttribute("class","hidden")
+    subLine.setAttribute("class", "hidden")
     quizContainer.removeAttribute('class', 'hidden')
+    buildQuiz()
 }
