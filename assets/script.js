@@ -54,7 +54,11 @@ function buildQuiz() {
   );
   // finally combine our output list into one string of HTML and put it on the page
   quizContainer.innerHTML = output.join('');
+
+  //following line was suggested by a TA for the display instead
+  //quizContainer.textContent = myQuestions.question;
 }
+
 function showResults() {
   // gather answer containers from our quiz
   const answerContainers = quizContainer.querySelectorAll('.answers');
