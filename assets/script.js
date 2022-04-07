@@ -1,151 +1,146 @@
-function startQuiz() {
-  start.setAttribute('class', 'hide');
-  quizContainer.removeAttribute('class', 'hide')
-  submitButton.removeAttribute('class', 'hide');
-  timer = setInterval(handleTimer, 1000);
-  timerEl.textContent = time;
-  buildQuiz()
-}
+//start screen user sees on load
+const startScreen = document.getElementById("startScreen")
+//start button
+const btn = document.getElementById("btn");
+const subLine = document.getElementById("subLine")
+const quizContainer = document.getElementById('quizContainer')
+const scoreSaver = document.getElementById('scoreSaver')
+//variable to track question index
+var i = 0
 
-function handleTimer() {
-  //timer counts down
-  time--;
-  timerEl.textContent = time;
+var myQuestions = [
+    {
+        question: "What color is the sky?",
 
-  //check to make sure time doesn't go negative
-  //but not negatively
-  if (time === -1) {
-    //just in case, but not necessary because...
-    clearInterval(timer);
-    //the alert stops the timer anyways
-    showResults()
-  }
-}
+        answers: [
+            "red",
+            "green",
+            "blue"
+        ],
+        correctAnswer: "blue"
+    },
+    {
+        question: "What color is red?",
 
-function highScore() {
+        answers: [
+            "red",
+            "green",
+            "blue"
+        ],
+        correctAnswer: "red"
+    },
+    {
+        question: "What color is blue?",
 
-}
+        answers: [
+            "red",
+            "green",
+            "blue"
+        ],
+        correctAnswer: "blue"
+    },
+]
 
+//Display quiz from array when user presses start
 function buildQuiz() {
-  // variable to store the HTML output
-  const output = [];
-  // for each question...
-  myQuestions.forEach(
-    (currentQuestion, questionNumber) => {
-      // variable to store the list of possible answers
-      const answers = [];
-      // and for each available answer...
-      for (letter in currentQuestion.answers) {
-        // ...add an HTML radio button
-        answers.push(
-          `<label>
-            <input type="radio" name="question${questionNumber}" value="${letter}">
-            ${letter} :
-            ${currentQuestion.answers[letter]}
-          </label>`
-        );
-      }
-      // add this question and its answers to the output
-      output.push(
-        `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join('')} </div>`
-      );
-    }
-  );
-  // finally combine our output list into one string of HTML and put it on the page
-  quizContainer.innerHTML = output.join('');
+    quizContainer.innerHTML = `<h3>${myQuestions[i].question}</h3>
+  
+            
+            <button id="answerA" >${myQuestions[i].answers[0]}</button>
 
-  //following line was suggested by a TA for the display instead
-  //quizContainer.textContent = myQuestions.question;
+            <button id="answerB">${myQuestions[i].answers[1]}</button>
+            
+            <button id="answerC">${myQuestions[i].answers[2]}</button>`
+
+    //variables that contain id's for each button on the screen
+    var answerA = document.getElementById('answerA')
+    var answerB = document.getElementById('answerB')
+    var answerC = document.getElementById('answerC')
+
+    answerA.addEventListener('click', answerCheck)
+    answerB.addEventListener('click', answerCheck)
+    answerC.addEventListener('click', answerCheck)
 }
 
-function showResults() {
-  // gather answer containers from our quiz
-  const answerContainers = quizContainer.querySelectorAll('.answers');
-  // keep track of user's answers
-  let numCorrect = 0;
-  // for each question...
-  myQuestions.forEach((currentQuestion, questionNumber) => {
-    // find selected answer
-    const answerContainer = answerContainers[questionNumber];
-    const selector = `input[name=question${questionNumber}]:checked`;
-    const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-    // if answer is correct
-    if (userAnswer === currentQuestion.correctAnswer) {
-      // add to the number of correct answers
-      numCorrect++;
-      // color the answers green
-      answerContainers[questionNumber].style.color = 'lightgreen';
-    }
-    // if answer is wrong or blank
-    else {
-      // color the answers red
-      answerContainers[questionNumber].style.color = 'red';
-    }
-  });
-
-  // show number of correct answers out of total
-  resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
-  // show number of correct answers out of total and confirm save score, else reload
-  if (confirm(`Quiz Over: You got ${numCorrect} out of ${myQuestions.length} correct. 
-  Save your score?`) === true) {
-    //prompt initials and add to high score ul and reload, else just reload
-    if (prompt(`Type initials below:`) === true) {
-      // highScore();
-      location.reload()
-    } else {
-      location.reload()
-    }
-  } else {
-    location.reload()
-  };
-}
-
-
-const quizContainer = document.getElementById('quiz');
-const resultsContainer = document.getElementById('results');
-const submitButton = document.getElementById('submit');
-const startBtn = document.getElementById('startBtn');
-const start = document.getElementById('start');
-const myQuestions = [
-  {
-    question: "Who invented JavaScript?",
-    answers: {
-      a: "Douglas Crockford",
-      b: "Sheryl Sandberg",
-      c: "Brendan Eich"
-    },
-    correctAnswer: "c"
-  },
-  {
-    question: "Which one of these is a JavaScript package manager?",
-    answers: {
-      a: "Node.js",
-      b: "TypeScript",
-      c: "npm"
-    },
-    correctAnswer: "c"
-  },
-  {
-    question: "Which tool can you use to ensure code quality?",
-    answers: {
-      a: "Angular",
-      b: "jQuery",
-      c: "RequireJS",
-      d: "ESLint"
-    },
-    correctAnswer: "d"
-  }
-];
-
+//timer variables
 let time = myQuestions.length * 30;
 let timer;
 const timerEl = document.getElementById('timerEl')
 
-// Kick things off
-//buildQuiz();
+//timer function
+function handleTimer() {
+    //timer counts down
+    time--;
+    timerEl.textContent = time;
+}
 
-// Event listeners
-startBtn.addEventListener('click', startQuiz)
-console.log(startQuiz)
-submitButton.addEventListener('click', showResults);
+function answerCheck() {
+    //console.log(this.innerText)
+
+
+    if (this.innerText === myQuestions[i].correctAnswer) {
+        //if answer is correct
+        console.log('correct!')
+        //increment the index
+        i++
+        //rebuild the quiz question
+        buildQuiz()
+    } else {
+        console.log('false!')
+        //deduct time
+        time = time - 15
+    }
+
+    if (time <= 0) {
+        endGame()
+    }
+}
+
+function endGame() {
+    //hide timer
+    timerEl.setAttribute('class', 'hidden')
+    
+    //set time to zero and clear interval
+    time = 0
+    clearInterval(timer)
+
+    if (window.confirm("GAME OVER: Would you like to save your score?")){
+        highScore()
+    }else{
+        location.reload()
+    }
+    
+}
+
+function highScore() {
+    quizContainer.setAttribute('class', 'hidden')
+    scoreSaver.removeAttribute('class', 'hidden')
+    //add HTML to id=currentScore to display time score
+}
+
+//when user clicks start, the timer starts and quiz is built
+btn.onclick = function hideStart() {
+    startScreen.setAttribute("class", "hidden")
+    subLine.setAttribute("class", "hidden")
+    quizContainer.removeAttribute('class', 'hidden')
+
+    timer = setInterval(handleTimer, 1000);
+    timerEl.textContent = time;
+
+    buildQuiz()
+}
+
+// localStorage.setItem('highScores', JSON.stingify(scoreArray))
+// JSON.parse(localStorage.getItem('highScores'))
+
+// var scoreArray= [];
+
+// var newScore = {
+//     'initials': initials,
+//     'score': time
+// }
+
+// scoreArray.push(newScore)
+
+//     https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
+//     plus you need https://developer.mozilla.org/en-US/docs/Web/API/FormData for getting the FormData
