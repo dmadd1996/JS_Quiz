@@ -9,6 +9,8 @@ const scoreSaver = document.getElementById('scoreSaver')
 const currentScore = document.getElementById('currentScore')
 //variable to track question index
 var i = 0
+const initialsBtn = document.getElementById('initialsBtn')
+const savedScores = document.getElementById('savedScores')
 
 
 var myQuestions = [
@@ -88,10 +90,10 @@ function answerCheck() {
     console.log(`index is ${i}`)
     console.log(`myQuestions length is ${myQuestions.length}`)
     //if the quiz is over
-    if (myQuestions.length = i) {
+    if (myQuestions.length == i) {
       //end the quiz
       endGame()
-    }else{
+    } else {
       //rebuild the quiz question
       buildQuiz()
     }
@@ -111,7 +113,6 @@ function endGame() {
   timerEl.setAttribute('class', 'hidden')
 
   //set time to zero and clear interval
-  time = 0
   clearInterval(timer)
 
   if (window.confirm("GAME OVER: Would you like to save your score?")) {
@@ -129,6 +130,27 @@ function highScore() {
   currentScore.innerHTML = `Your score is ${time}`
 }
 
+function displayScores() {
+  savedScores.textContent = displayedScoreArray
+}
+
+var initials = document.getElementById('initials')
+var scoreArray = [];
+
+initialsBtn.onclick = function ScoreSave() {
+  var newScore = {
+    'initials': initials.value,
+    'score': time
+  }
+
+  scoreArray.push(newScore)
+  console.log(scoreArray)
+
+  localStorage.setItem('highScores', JSON.stringify(scoreArray))
+}
+
+savedScores.textContent = JSON.parse(localStorage.getItem('highScores'))
+
 //when user clicks start, the timer starts and quiz is built
 btn.onclick = function hideStart() {
   startScreen.setAttribute("class", "hidden")
@@ -140,18 +162,6 @@ btn.onclick = function hideStart() {
 
   buildQuiz()
 }
-
-// localStorage.setItem('highScores', JSON.stingify(scoreArray))
-// JSON.parse(localStorage.getItem('highScores'))
-
-// var scoreArray= [];
-
-// var newScore = {
-//     'initials': initials,
-//     'score': time
-// }
-
-// scoreArray.push(newScore)
 
 //     https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
 //     plus you need https://developer.mozilla.org/en-US/docs/Web/API/FormData for getting the FormData
