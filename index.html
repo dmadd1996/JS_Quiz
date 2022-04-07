@@ -1,33 +1,66 @@
 <!DOCTYPE html>
-<html lang="en-us">
-    
-<head>
-    <title>JavaScript Quiz</title>
+<html lang="en">
 
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/style.css">
-    <style>
-        .body, .h1, .h2 {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-    </style>
+
+    <title>JS Quiz</title>
 </head>
+
 <body>
-    <header>
-        <p>
-            timer: <span id="timerEl"></span>
-        </p>
-    </header>
-    <div id="start">
-    <div id="start" class="container column">
-        <h1>Welcome to the Quiz</h1>
-        <p>Click start to begin the Quiz</p>
-        <button id="startBtn">Start</button>
+
+    <div class="min-vh-100 d-flex align-items-center bg-dark">
+
+        <section class="w-100 row justify-content-center">
+
+            <div class="col-10 col-md-6 col-lg-5">
+
+                <h1 class="display-3 text-center text-white">JavaScript Quiz</h1>
+
+                <p id="subLine" class="text-center text-white"> Test Your Might</p>
+
+                <div class="bg-white my-4 p-4 rounded">
+                    <!-- What the user sees on page load -->
+                    <header>
+                        <p>
+                            timer: <span id="timerEl"></span>
+                        </p>
+                    </header>
+
+                    <div id="startScreen">
+                        <h2 class="font-weight-bold text-center mb-3">THIS IS A TIMED QUIZ</h2>
+                        <h3 class="text-center mb-3">Time is deducted for wrong answers.</h3>
+                        <h3 class="text-center mb-5">When you are prepared, Press Start.</h3>
+                        <button id="btn" class="btn-block btn-warning">Start</button>
+                    </div>
+
+                    <div id="quizContainer" class="hidden"></div>
+
+                    <div id="scoreSaver" class="hidden">
+                        <h2 class="text-center mb-3">Game Over</h2>
+                        <input type="text" id="initials"></input>
+                        <div id="currentScore"></div>
+                    </div>
+
+                    <div class="bg-white my-4 p-4 rounded">
+                        <h2>
+                            High Scores:
+                        </h2>
+                        <p id="highScores"></p>
+                    </div>
+                    
+                </div>
+
+        </section>
+
     </div>
 
-    <div id="quiz" class="hide"></div>
-    <button id="submit" class="hide">Submit Quiz</button>
-    <div id="results"></div>
-    
     <script src="./assets/script.js"></script>
 </body>
+
+</html>
