@@ -130,12 +130,17 @@ function highScore() {
   currentScore.innerHTML = `Your score is ${time}`
 }
 
-function displayScores() {
-  savedScores.textContent = displayedScoreArray
-}
+// function displayScores() {
+//   savedScores.textContent = displayedScoreArray
+// }
 
-function setScore(){
-  localStorage.setItem('highScores', JSON.stringify(scoreArray))
+function printHighscores(){
+  var highScores = JSON.parse(localStorage.getItem('highScores') || [])
+  console.log("hs", highScores)
+  for (let i = 0; i < highScores.length; i++) {
+
+    savedScores.textContent = highScores; 
+  }
 }
 
 var initials = document.getElementById('initials')
@@ -150,10 +155,10 @@ initialsBtn.onclick = function ScoreSave() {
   scoreArray.push(newScore)
   console.log(scoreArray)
 
-  scoreLocalSet()
+  localStorage.setItem('highScores', JSON.stringify(scoreArray))
 }
 
-savedScores.textContent = JSON.parse(localStorage.getItem('highScores'))
+// savedScores.textContent = JSON.parse(localStorage.getItem('highScores'))
 
 //when user clicks start, the timer starts and quiz is built
 btn.onclick = function hideStart() {
@@ -165,7 +170,16 @@ btn.onclick = function hideStart() {
   timerEl.textContent = time;
 
   buildQuiz()
+  printHighscores()
 }
 
 //     https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
 //     plus you need https://developer.mozilla.org/en-US/docs/Web/API/FormData for getting the FormData
+
+//You may want to approach it as follows:
+// • Create a whole function to print the highscores, that ulitmately you'll call along with your buildQuiz function. So, maybe just call it printHighscores
+// • In this function, you can include your current line 156, something like
+// var highscores = JSON.parse(localStorage.getItem('highScores') || [])
+// the || [] at the end is just saying OR set to an empty array, by the way.
+// • Also within the function, you will want to run your loop, either a for loop or a forEach would work great! This is where you can create the elements document.createElement("li)" and then you can set the textContext of the element you created from your highscores array.
+// • Then, also within the for loop, you can append the element to wherever you'd like your high scores to show on the page.
