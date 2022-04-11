@@ -15,34 +15,64 @@ const savedScores = document.getElementById('savedScores')
 
 var myQuestions = [
   {
-    question: "What color is the sky?",
+    question: "Inside which HTML element do we put the JavaScript?",
 
     answers: [
-      "red",
-      "green",
-      "blue"
+      "js",
+      "javascript",
+      "script"
     ],
-    correctAnswer: "blue"
+    correctAnswer: "script"
   },
   {
-    question: "What color is red?",
+    question: "To access an HTML element from JavaScript, you can use this method:",
 
     answers: [
-      "red",
-      "green",
-      "blue"
+      "setAttribute",
+      "getElementById",
+      "getItem"
     ],
-    correctAnswer: "red"
+    correctAnswer: "getElementById"
   },
   {
-    question: "What color is blue?",
+    question: "How do you create a function in JavaScript?",
 
     answers: [
-      "red",
-      "green",
-      "blue"
+      "function myFunction()",
+      "function = myFunction()",
+      "function.myFunction()"
     ],
-    correctAnswer: "blue"
+    correctAnswer: "function myFunction()"
+  },
+  {
+    question: "Which statement tells the browser to write 'Hello Dolly' inside an HTML element with id='demo'?",
+
+    answers: [
+      "demo.innerHTML='Hello Dolly';",
+      "document.getElementById('demo').innerHTML='Hello Dolly';",
+      "document.getElementById('demo')= innerHTML('Hello Dolly');"
+    ],
+    correctAnswer: "document.getElementById('demo').innerHTML='Hello Dolly';"
+  },
+  {
+    question: `javascript elements are executed in what order?`,
+
+    answers: [
+      "variables, functions, event listeners",
+      "functions, variables, others",
+      "in the sequence they are written"
+    ],
+    correctAnswer: "in the sequence they are written"
+  },
+  {
+    question: `used to declare a javascript variable`,
+
+    answers: [
+      "function",
+      "var",
+      "//"
+    ],
+    correctAnswer: "var"
   },
 ]
 
@@ -135,11 +165,12 @@ function highScore() {
 // }
 
 function printHighscores(){
-  var highScores = JSON.parse(localStorage.getItem('highScores') || [])
-  console.log("hs", highScores)
-  for (let i = 0; i < highScores.length; i++) {
+  var highScoresParse = JSON.parse(localStorage.getItem('highScores') || [])
+  console.log("hs", JSON.stringify(highScoresParse))
+  var highScoresString = JSON.stringify(highScoresParse)
+  for (let i = 0; i < highScoresParse.length; i++) {
 
-    savedScores.textContent = highScores; 
+    savedScores.textContent = highScoresString; 
   }
 }
 
@@ -170,16 +201,8 @@ btn.onclick = function hideStart() {
   timerEl.textContent = time;
 
   buildQuiz()
-  printHighscores()
 }
+printHighscores()
 
 //     https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
 //     plus you need https://developer.mozilla.org/en-US/docs/Web/API/FormData for getting the FormData
-
-//You may want to approach it as follows:
-// • Create a whole function to print the highscores, that ulitmately you'll call along with your buildQuiz function. So, maybe just call it printHighscores
-// • In this function, you can include your current line 156, something like
-// var highscores = JSON.parse(localStorage.getItem('highScores') || [])
-// the || [] at the end is just saying OR set to an empty array, by the way.
-// • Also within the function, you will want to run your loop, either a for loop or a forEach would work great! This is where you can create the elements document.createElement("li)" and then you can set the textContext of the element you created from your highscores array.
-// • Then, also within the for loop, you can append the element to wherever you'd like your high scores to show on the page.
