@@ -173,9 +173,9 @@ function printHighscores(){
 }
 
 var initials = document.getElementById('initials')
-var scoreArray = [];
+var scoreArray = JSON.parse(window.localStorage.getItem("scoreArray")) || [];
 
-initialsBtn.onclick = function ScoreSave() {
+initialsBtn.onclick = function scoreSave() {
   var newScore = {
     'initials': initials.value,
     'score': time
