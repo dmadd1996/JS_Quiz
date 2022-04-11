@@ -28,7 +28,7 @@
                     <!-- What the user sees on page load -->
                     <header>
                         <p>
-                            timer: <span id="timerEl"></span>
+                            TIMER: <span id="timerEl"></span>
                         </p>
                     </header>
 
@@ -44,17 +44,16 @@
                     <div id="scoreSaver" class="hidden">
                         <h2 class="text-center mb-3">Game Over</h2>
                         <p>Please type your initials here:</p>
-                        <input type="text" id="initials"></input> <button id="initialsBtn">Submit</button>
+                        <input type="text" style="text-transform: uppercase;" maxlength="2" id="initials"></input> <button class="btn-success rounded" id="initialsBtn">Submit</button>
+                        <p class="hidden" id="initialsWarning">Too short</p>
                         <div id="currentScore"></div>
                     </div>
 
                     <div class="bg-white my-4 p-4 rounded">
-                        <div>
+                        <div class="font-weight-bold mb-3">
                             High Scores:
                         </div>
-                        <p id="savedScores"></p>
-                        <!-- stringed versions to be added to the local storage -->
-                        <p id="hiddenScores"></p>
+                        <p style="text-transform: uppercase;" id="savedScores"></p>
                     </div>
                     
                 </div>

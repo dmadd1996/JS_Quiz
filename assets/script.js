@@ -81,24 +81,25 @@ var myQuestions = [
 function buildQuiz() {
   quizContainer.innerHTML = `<h3>${myQuestions[i].question}</h3>
             
-  <button id="answerA" >${myQuestions[i].answers[0]}</button>
+  <div class="mb-3"><button class="btn-block btn-primary" id="answerA" >${myQuestions[i].answers[0]}</button></div>
 
-  <button id="answerB">${myQuestions[i].answers[1]}</button>
+  <div class="mb-3"><button class="btn-block btn-primary" id="answerB">${myQuestions[i].answers[1]}</button></div>
             
-  <button id="answerC">${myQuestions[i].answers[2]}</button>`
+  <div class="mb-3"><button class="btn-block btn-primary" id="answerC">${myQuestions[i].answers[2]}</button></div>`
 
   //variables that contain id's for each button on the screen
   var answerA = document.getElementById('answerA')
   var answerB = document.getElementById('answerB')
   var answerC = document.getElementById('answerC')
 
+  //each button is its own submit, and only the correct submit "id" will allow the user to increment index
   answerA.addEventListener('click', answerCheck)
   answerB.addEventListener('click', answerCheck)
   answerC.addEventListener('click', answerCheck)
 }
 
 //timer variables
-let time = myQuestions.length * 30;
+let time = myQuestions.length * 20;
 let timer;
 const timerEl = document.getElementById('timerEl')
 
@@ -107,6 +108,42 @@ function handleTimer() {
   //timer counts down
   time--;
   timerEl.textContent = time;
+
+  if (time <= 0) {
+    endGame()
+  }
+}
+
+//colors red for 2 seconds on incorrect answer
+function highlight() {
+
+  timerEl.setAttribute('class', 'text-danger font-weight-bold');
+
+  setTimeout(function () {
+    timerEl.removeAttribute('class', 'text-danger font-weight-bold');
+  }, 2000);
+
+  var answerA = document.getElementById('answerA')
+  var answerB = document.getElementById('answerB')
+  var answerC = document.getElementById('answerC')
+
+  answerA.setAttribute('class', 'btn-block btn-danger');
+
+  setTimeout(function () {
+    answerA.setAttribute('class', 'btn-block btn-primary');
+  }, 2000);
+
+  answerB.setAttribute('class', 'btn-block btn-danger');
+
+  setTimeout(function () {
+    answerB.setAttribute('class', 'btn-block btn-primary');
+  }, 2000);
+
+  answerC.setAttribute('class', 'btn-block btn-danger');
+
+  setTimeout(function () {
+    answerC.setAttribute('class', 'btn-block btn-primary');
+  }, 2000);
 }
 
 function answerCheck() {
@@ -132,10 +169,8 @@ function answerCheck() {
     console.log('false!')
     //deduct time
     time = time - 15
-  }
 
-  if (time <= 0) {
-    endGame()
+    highlight()
   }
 }
 
@@ -146,8 +181,10 @@ function endGame() {
   //set time to zero and clear interval
   clearInterval(timer)
 
+  //ask the user if they would like to proceed to end of game, score save
   if (window.confirm("GAME OVER: Would you like to save your score?")) {
     highScore()
+    //if not, reload
   } else {
     location.reload()
   }
@@ -155,7 +192,9 @@ function endGame() {
 }
 
 function highScore() {
+  //hide quiz
   quizContainer.setAttribute('class', 'hidden')
+  //reveal end of game screen
   scoreSaver.removeAttribute('class', 'hidden')
   //add HTML to id=currentScore to display time score
   currentScore.innerHTML = `Your score is ${time}`
@@ -165,27 +204,37 @@ function highScore() {
 //   savedScores.textContent = displayedScoreArray
 // }
 
-function printHighscores(){
+function printHighscores() {
+  //pull from local
   var highScoresParse = JSON.parse(localStorage.getItem('highScores') || [])
   console.log("hs", JSON.stringify(highScoresParse))
   // var highScoresString = JSON.stringify(highScoresParse)
-  savedScores.textContent += `initials: ${highScoresParse[0].initials}, score ${highScoresParse[0].score}`; 
+
+  for (let i = 0; i < highScoresParse.length; i++) {
+    savedScores.innerHTML += `<p> ${highScoresParse[i].initials} scored ${highScoresParse[i].score} points </p>`;
+  }
 }
 
 var initials = document.getElementById('initials')
-var scoreArray = JSON.parse(window.localStorage.getItem("scoreArray")) || [];
+var scoreArray = JSON.parse(window.localStorage.getItem("highScores")) || [];
 
 initialsBtn.onclick = function scoreSave() {
+
+  //compile user input and remaining time into one var
   var newScore = {
     'initials': initials.value,
     'score': time
   }
 
+  //push to array
   scoreArray.push(newScore)
 
+  //push array to local (see printHighScores() for pull)
   localStorage.setItem('highScores', JSON.stringify(scoreArray))
 
+  //reload page on submit
   location.reload()
+
 }
 
 // savedScores.textContent = JSON.parse(localStorage.getItem('highScores'))
