@@ -11,6 +11,7 @@ const currentScore = document.getElementById('currentScore')
 var i = 0
 const initialsBtn = document.getElementById('initialsBtn')
 const savedScores = document.getElementById('savedScores')
+const hiddenScores = document.getElementById('hiddenScores')
 
 
 var myQuestions = [
@@ -167,11 +168,8 @@ function highScore() {
 function printHighscores(){
   var highScoresParse = JSON.parse(localStorage.getItem('highScores') || [])
   console.log("hs", JSON.stringify(highScoresParse))
-  var highScoresString = JSON.stringify(highScoresParse)
-  for (let i = 0; i < highScoresParse.length; i++) {
-
-    savedScores.textContent = highScoresString; 
-  }
+  // var highScoresString = JSON.stringify(highScoresParse)
+  savedScores.textContent += `initials: ${highScoresParse[0].initials}, score ${highScoresParse[0].score}`; 
 }
 
 var initials = document.getElementById('initials')
@@ -184,9 +182,10 @@ initialsBtn.onclick = function ScoreSave() {
   }
 
   scoreArray.push(newScore)
-  console.log(scoreArray)
 
   localStorage.setItem('highScores', JSON.stringify(scoreArray))
+
+  location.reload()
 }
 
 // savedScores.textContent = JSON.parse(localStorage.getItem('highScores'))
